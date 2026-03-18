@@ -6,7 +6,7 @@ const SideBar = () => {
     <div className="sidebar">
         <Link to="/add-task">ADD TASK</Link>
         <Link to="/view-task">VIEW TASK</Link>
-        <Link to="/search-edit-task">EDIT TASK</Link>
+        <Link to="/edit-task">EDIT TASK</Link>
         <Link to="/delete-task">DELETE TASK</Link>
     </div>
   )

@@ -1,59 +1,38 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import "./SearchTask.css";
 
-const SearchTask = () => {
-
+const SearchTask = ({ onTaskFound }) => {
   const [taskId, setTaskId] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+  const API = process.env.REACT_APP_API_URL;
 
   const searchTask = async () => {
-
-    if(!taskId){
+    if (!taskId) {
       setMessage("Enter Task ID");
       return;
     }
 
     try {
-
-      const res = await axios.get(`http://localhost:8080/tasks/${taskId}`);
-
-      if(res.data == null){
-        setMessage("Task not found");
-      }
-      else{
-        setMessage("");
-        navigate(`/edit-task/${taskId}`);
-      }
-
-    } catch(error){
-
+      const res = await axios.get(`${API}/tasks/${taskId}`);
+      if (!res.data) setMessage("Task not found");
+      else onTaskFound(res.data);
+    } catch (error) {
+      console.error("Search error:", error.response || error.message);
       setMessage("Task not found");
-
     }
-
   };
 
   return (
     <div className="search-container">
-
-      <h2>Search Task</h2>
-
       <input
         type="number"
         placeholder="Enter Task ID"
         value={taskId}
-        onChange={(e)=>setTaskId(e.target.value)}
+        onChange={(e) => setTaskId(e.target.value)}
       />
-
-      <button onClick={searchTask}>
-        Search
-      </button>
-
+      <button onClick={searchTask}>Search</button>
       {message && <p className="error-msg">{message}</p>}
-
     </div>
   );
 };

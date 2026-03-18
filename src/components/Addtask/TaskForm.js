@@ -4,6 +4,8 @@ import "./TaskForm.css";
 
 const TaskForm = () => {
 
+  const API = process.env.REACT_APP_API_URL; 
+
   const [taskData, setTaskData] = useState({
     task: "",
     description: "",
@@ -11,6 +13,8 @@ const TaskForm = () => {
     status: "LOW"
   });
 
+  const [message, setMessage] = useState(""); 
+ 
   const handleChange = (e) => {
     setTaskData({
       ...taskData,
@@ -18,28 +22,33 @@ const TaskForm = () => {
     });
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-
-      const response = await axios.post(
-        "http://localhost:8080/tasks",
-        taskData
-      );
+      const response = await axios.post(`${API}/tasks`, taskData);
 
       console.log(response.data);
 
-      alert("Task Added Successfully");
+      setMessage("Task Added Successfully!"); 
+
+      
+      setTaskData({
+        task: "",
+        description: "",
+        date: "",
+        status: "LOW"
+      });
 
     } catch (error) {
       console.error(error);
+      setMessage("Failed to add task."); 
     }
   };
 
   return (
     <div className="task-container">
-
       <h2>Add Task</h2>
 
       <form onSubmit={handleSubmit} className="task-form">
@@ -73,14 +82,14 @@ const TaskForm = () => {
           onChange={handleChange}
         >
           <option value="LOW">LOW</option>
-          <option value="HIGH">HIGH</option>
           <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
         </select>
 
         <button type="submit">Add Task</button>
-
       </form>
 
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

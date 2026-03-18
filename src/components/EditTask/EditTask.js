@@ -1,116 +1,89 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import SearchTask from "../SearchTask/SearchTask";
 import "./EditTask.css";
 
 const EditTask = () => {
+  const API = process.env.REACT_APP_API_URL;
+  const [taskData, setTaskData] = useState(null); 
+  const [message, setMessage] = useState("");
 
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  const [taskData, setTaskData] = useState({
-    task: "",
-    description: "",
-    date: "",
-    status: "LOW"
-  });
-
-  useEffect(() => {
-    loadTask();
-  }, []);
-
-  const loadTask = async () => {
-
-    try {
-
-      const result = await axios.get(
-        `http://localhost:8080/tasks/${id}`
-      );
-
-      setTaskData(result.data);
-
-    } catch(error){
-
-      console.error(error);
-
-    }
-
+  
+  const handleTaskFound = (task) => {
+    setTaskData(task); 
+    setMessage("");
   };
 
   const handleChange = (e) => {
-
-    setTaskData({
-      ...taskData,
-      [e.target.name]: e.target.value
-    });
-
+    setTaskData({ ...taskData, [e.target.name]: e.target.value });
   };
 
   const updateTask = async (e) => {
-
     e.preventDefault();
+    if (!taskData) return;
 
-    await axios.put(
-      `http://localhost:8080/tasks/${id}`,
-      taskData
-    );
-
-    alert("Task Updated");
-
-    navigate("/view-task");
-
+    try {
+      await axios.put(`${API}/tasks/${taskData.id}`, taskData);
+      setMessage("Task updated successfully!");
+    } catch (error) {
+      console.error("Update error:", error.response || error.message);
+      setMessage("Update failed");
+    }
   };
 
   return (
-
     <div className="edit-container">
-
       <h2>Edit Task</h2>
 
-      <form className="edit-form" onSubmit={updateTask}>
+      
+      {!taskData && <SearchTask onTaskFound={handleTaskFound} />}
 
-        <input
-          type="text"
-          name="task"
-          value={taskData.task}
-          onChange={handleChange}
-          placeholder="Task Name"
-        />
+      
+      {taskData && (
+        <form className="edit-form" onSubmit={updateTask}>
+          <input
+            type="text"
+            name="task"
+            value={taskData.task || ""}
+            onChange={handleChange}
+            placeholder="Task Name"
+            required
+          />
+          <textarea
+            name="description"
+            value={taskData.description || ""}
+            onChange={handleChange}
+            placeholder="Description"
+          />
+          <input
+            type="date"
+            name="date"
+            value={taskData.date || ""}
+            onChange={handleChange}
+          />
+          <select
+            name="status"
+            value={taskData.status || "LOW"}
+            onChange={handleChange}
+          >
+            <option value="LOW">LOW</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="HIGH">HIGH</option>
+          </select>
+          <button type="submit">Update Task</button>
+          <button
+            type="button"
+            onClick={() => setTaskData(null)} 
+            style={{ marginLeft: "10px" }}
+          >
+            Search Another
+          </button>
+        </form>
+      )}
 
-        <textarea
-          name="description"
-          value={taskData.description}
-          onChange={handleChange}
-          placeholder="Description"
-        />
-
-        <input
-          type="date"
-          name="date"
-          value={taskData.date}
-          onChange={handleChange}
-        />
-
-        <select
-          name="status"
-          value={taskData.status}
-          onChange={handleChange}
-        >
-          <option value="LOW">LOW</option>
-          <option value="MEDIUM">MEDIUM</option>
-          <option value="HIGH">HIGH</option>
-        </select>
-
-        <button type="submit">
-          Update Task
-        </button>
-
-      </form>
-
+      {message && <p className="message">{message}</p>}
     </div>
-
   );
-
 };
 
 export default EditTask;
