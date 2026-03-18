@@ -1,0 +1,53 @@
+.delete-container{
+  padding:30px;
+}
+
+.search-box{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.search-box input{
+  padding:8px;
+  border:1px solid #ccc;
+  border-radius:4px;
+}
+
+.search-box button{
+  padding:8px 15px;
+  background:#04AA6D;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.search-box button:hover{
+  background:#038d59;
+}
+
+.task-card{
+  border:1px solid #ddd;
+  padding:20px;
+  width:300px;
+  background:#f9f9f9;
+  border-radius:5px;
+}
+
+.delete-btn{
+  margin-top:15px;
+  padding:8px 12px;
+  background:red;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.delete-btn:hover{
+  background:darkred;
+}
+
+.message{
+  color:red;
+  font-weight:bold;
+}

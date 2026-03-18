@@ -1,0 +1,30 @@
+.edit-container{
+  padding:30px;
+}
+
+.edit-form{
+  width:400px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select{
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+.edit-form button{
+  background:#04AA6D;
+  color:white;
+  border:none;
+  padding:10px;
+  cursor:pointer;
+}
+
+.edit-form button:hover{
+  background:#038d59;
+}

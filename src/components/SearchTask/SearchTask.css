@@ -1,0 +1,31 @@
+.search-container{
+  padding:40px;
+  width:300px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.search-container input{
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+.search-container button{
+  padding:10px;
+  background:#04AA6D;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.error-msg{
+  color:red;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.search-container button:hover{
+  background:#038d59;
+}
