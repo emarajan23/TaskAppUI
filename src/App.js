@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
-
 import TopNav from "./components/Header/TopNav";
 import SideBar from "./components/Sidebar/SideBar";
 import AppRoutes from "./routes/AppRoutes";
+import "./App.css"; 
 
 function App() {
   return (
@@ -10,11 +10,11 @@ function App() {
 
       <TopNav />
 
-      <div style={{ display: "flex" }}>
+      <div className="main-container">   
 
         <SideBar />
 
-        <div style={{ padding: "20px", flex: 1 }}>
+        <div className="content">      
           <AppRoutes />
         </div>
 

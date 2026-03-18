@@ -21,3 +21,17 @@
   background-color: #04AA6D;
   color: white;
 }
+
+
+@media (max-width: 768px) {
+  .topnav {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: auto;
+  }
+
+  .topnav a {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

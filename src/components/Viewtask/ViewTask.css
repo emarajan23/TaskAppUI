@@ -1,23 +1,33 @@
-.table-container{
-  padding:20px;
+.table-container {
+  padding: 20px;
+  overflow-x: auto; 
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
+table {
+  width: 100%;
+  min-width: 600px; 
+  border-collapse: collapse;
 }
 
-th,td{
-  border:1px solid #ddd;
-  padding:10px;
-  text-align:left;
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }
 
-th{
-  background-color:#04AA6D;
-  color:white;
+th {
+  background-color: #04AA6D;
+  color: white;
 }
 
-tr:nth-child(even){
-  background-color:#f2f2f2;
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+@media (max-width: 768px) {
+  th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
 }
