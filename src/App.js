@@ -1,25 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
-import TopNav from "./components/Header/TopNav";
-import SideBar from "./components/Sidebar/SideBar";
+import Navbar from "./components/Header/Navbar";
+import Footer from "./components/Footer/Footer";
 import AppRoutes from "./routes/AppRoutes";
 import "./App.css"; 
 
 function App() {
   return (
     <BrowserRouter>
-
-      <TopNav />
-
-      <div className="main-container">   
-
-        <SideBar />
-
-        <div className="content">      
-          <AppRoutes />
-        </div>
-
-      </div>
-
+      <Navbar />
+      <AppRoutes />
+      <Footer />
+      
     </BrowserRouter>
   );
 }
