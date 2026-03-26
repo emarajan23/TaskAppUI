@@ -1,15 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 
 import TaskPage from "../pages/TaskPage";
+import Contact from '../components/Temp/Contact';    
+import About from '../components/Temp/About';  
+
+
 
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* <Route path="/add-task" element={<TaskForm />} />
-      <Route path="/view-task" element={<ViewTask />} />
-      <Route path="/edit-task" element={<EditTask />} />
-      <Route path="/delete-task" element={<DeleteTask />} /> */}
+     
       <Route path="/" element={<TaskPage />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
 
     </Routes>
   );
